@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from "react";
+import StartView from "./components/StartView";
+import AppWiki from "./components/AppWiki";
 
 function App() {
+  const [searchStarted, setSearchStarted] = useState(false);
+  function handleClick(){
+    setSearchStarted(!searchStarted);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {(!searchStarted)&&<StartView handleClick={handleClick} theme={'Star Wars'}/>}
+      { (searchStarted) &&
+          (<main className={'App-main'}>
+            <AppWiki handleClick={handleClick}/>
+          </main>)
+      }
     </div>
   );
 }
